@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="User">
+
+	<resultMap id="userMap" class="com.ebiz.data.User">
+		<result property="email" column="email"/>
+		<result property="password" column="passwd"/>
+		<result property="permission" resultMap="User.permissionMap"/>
+		<result property="customer" resultMap="User.customerMap"/>
+		
+	</resultMap>
+	
+	<resultMap id="customerMap" class="com.ebiz.data.Customer">
+		<result property="customerId" column="customer_id"/>
+		<result property="firstName" column="first_name"/>
+		<result property="lastName" column="last_name"/>
+		<result property="contactPhone" column="contact_phone"/>
+		<result property="contactFax" column="contact_fax"/>
+		<result property="address1" column="bill_address1"/>
+		<result property="address2" column="bill_address2"/>
+		<result property="city" column="bill_city"/>
+		<result property="state" column="bill_state"/>
+		<result property="zip" column="bill_zip"/>
+		<result property="zip4" column="bill_zip4"/>
+		<result property="country" column="bill_country"/>
+		<result property="shipAddress1" column="ship_address1"/>
+		<result property="shipAddress2" column="ship_address2"/>
+		<result property="shipCity" column="ship_city"/>
+		<result property="shipState" column="ship_state"/>
+		<result property="shipZip" column="ship_zip"/>
+		<result property="shipZip4" column="ship_zip4"/>
+		<result property="shipCountry" column="ship_country"/>
+	</resultMap>
+	
+	<resultMap id="permissionMap" class="com.ebiz.data.Permission">
+		<result property="code" column="perm_id"/>
+		<result property="name" column="name"/>
+	</resultMap>
+		
+
+	<select id="validateUser" parameterClass="String" resultClass="com.ebiz.data.User" resultMap="userMap">
+		SELECT 	u.passwd, 
+			p.perm_id, 
+			p.name, 
+			c.customer_id, 
+			c.first_name, 
+			c.last_name, 
+			c.contact_phone, 
+       			c.contact_fax, 
+       			c.bill_address1, 
+       			c.bill_address2, 
+       			c.bill_city, 
+       			c.bill_state, 
+       			c.bill_zip, 
+       			c.bill_zip4, 
+       			c.bill_country,
+		     	c.ship_address1, 
+		     	c.ship_address2, 
+		     	c.ship_city, 
+		     	c.ship_state, 
+		     	c.ship_zip, 
+		     	c.ship_zip4, 
+		     	c.ship_country
+		FROM 	Users u, 
+			Customer c, 
+			Permission p
+		WHERE 	u.email = c.email 
+		AND 	u.perm_id = p.perm_id 
+		AND 	u.email = #email#
+		ORDER BY create_date desc
+		
+	</select>
+	
+	<select id="validateAdminUser" parameterClass="String" resultClass="com.ebiz.data.User" resultMap="userMap">
+		SELECT 	u.passwd, 
+			p.perm_id, 
+			p.name 
+		FROM 	Users u,
+			Permission p
+		WHERE 	u.perm_id = p.perm_id 
+		AND 	u.email = #email#
+	</select>
+
+	<insert id="insertUser" parameterClass="com.ebiz.data.User">
+		INSERT INTO Users 
+		(
+			email, 
+			passwd, 
+			perm_id
+		) 
+		VALUES (#email#,#password#,#permission.code#)
+	</insert>
+
+	<update id="updateUser" parameterClass="com.ebiz.data.User">
+		UPDATE 	Users 
+		SET 	passwd = #password#, 
+			perm_id = #permission.code# 
+		WHERE 	email = #email#
+	</update>
+
+</sqlMap>

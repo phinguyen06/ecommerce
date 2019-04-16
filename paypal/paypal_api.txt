@@ -1,0 +1,28 @@
+View or Remove API Signature Back to Profile Summary 
+ 
+
+--------------------------------------------------------------------------------
+ 
+ 
+ 
+For preconfigured shopping carts: Copy and paste the API username, password, and signature into your shopping cart configuration or administration screen. 
+
+For building custom shopping carts: Store the following credential information in a secure location with limited access.    
+Credential:  API Signature 
+API Username:  xxx
+API Password:  F7VHBWYCXUV2KYLL 
+Signature:   AooWeMwEUprSb-58ApUiwGtQwDFIAP2Fcdm3MR7xCJR-uVKrSCED7HxD
+Request Date:  Mar. 12, 2009 17:03:44 PDT 
+ 
+
+
+PROD
+	//public final static String s_PAYPAL_USER_NAME = "xxx.gmail.com";
+	//public final static String s_PAYPAL_PWD = "F7VHBWYCXUV2KYLL";
+	//public final static String s_PAYPAL_SIGNATURE = "AooWeMwEUprSb-58ApUiwGtQwDFIAP2Fcdm3MR7xCJR-uVKrSCED7HxD";
+
+TEST SANDBOX
+
+	//public final static String s_PAYPAL_USER_NAME = "xxx.yahoo.com";
+	//public final static String s_PAYPAL_PWD = "1236904156";
+	//public final static String s_PAYPAL_SIGNATURE = "Az-d2M7YeHW.K9EvxlnkjtZJbVRKAlVAvKD08puJ8JstAkWxo5TwvXZz";

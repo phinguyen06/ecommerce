@@ -1,0 +1,8 @@
+java
+	all DB
+Jsp
+
+Configuration
+	all ibatis database xml
+	
+Database

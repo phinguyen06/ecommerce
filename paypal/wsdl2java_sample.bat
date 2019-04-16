@@ -1,0 +1,1 @@
+wsdl2java -uri PayPalSvc.wsdl -d xmlbeans -o .

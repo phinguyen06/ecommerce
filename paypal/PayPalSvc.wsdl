@@ -1,0 +1,3055 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns="urn:ebay:api:PayPalAPI" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ebl="urn:ebay:apis:eBLBaseComponents" xmlns:cc="urn:ebay:apis:CoreComponentTypes" ns:version="56.0" targetNamespace="urn:ebay:api:PayPalAPI">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:ebay:api:PayPalAPI" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <import namespace="urn:ebay:apis:CoreComponentTypes" schemaLocation="CoreComponentTypes.xsd"/>
+            <import namespace="urn:ebay:apis:eBLBaseComponents" schemaLocation="eBLBaseComponents.xsd"/>
+            <!-- Custom Security header element-->
+            <element name="RequesterCredentials" type="ebl:CustomSecurityHeaderType"/>
+            <!-- API Request/Responses -->
+            <element name="RefundTransactionRequest" type="ns:RefundTransactionRequestType"/>
+            <element name="RefundTransactionResponse" type="ns:RefundTransactionResponseType"/>
+            <element name="RefundTransactionReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:RefundTransactionRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="RefundTransactionRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="TransactionID" type="ebl:TransactionId">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="RefundType" type="ebl:RefundType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Memo" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="RefundTransactionResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="RefundTransactionID" type="ebl:TransactionId" minOccurs="0" maxOccurs="1" nillable="true">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="NetRefundAmount" type="cc:BasicAmountType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>Amount subtracted from PayPal balance of original recipient of payment to make this refund 
+</documentation>
+                                </annotation>
+                            </element>
+                            <element name="FeeRefundAmount" type="cc:BasicAmountType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>Transaction fee refunded to original recipient of payment 
+</documentation>
+                                </annotation>
+                            </element>
+                            <element name="GrossRefundAmount" type="cc:BasicAmountType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>Amount of money refunded to original payer </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetTransactionDetailsRequest" type="ns:GetTransactionDetailsRequestType"/>
+            <element name="GetTransactionDetailsResponse" type="ns:GetTransactionDetailsResponseType"/>
+            <element name="GetTransactionDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetTransactionDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetTransactionDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="TransactionID" type="ebl:TransactionId">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetTransactionDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:PaymentTransactionDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="BillUserRequest" type="ns:BillUserRequestType"/>
+            <element name="BillUserResponse" type="ns:BillUserResponseType"/>
+            <element name="BillUserReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:BillUserRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="BillUserRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:MerchantPullPaymentDetails"/>
+                            <element name="ReturnFMFDetails" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>This flag indicates that the response should include FMFDetails</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="BillUserResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:BillUserResponseDetails"/>
+                            <element name="FMFDetails" type="ebl:FMFDetailsType" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="TransactionSearchRequest" type="ns:TransactionSearchRequestType"/>
+            <element name="TransactionSearchResponse" type="ns:TransactionSearchResponseType"/>
+            <element name="TransactionSearchReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:TransactionSearchRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="TransactionSearchRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="StartDate" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="EndDate" type="xs:dateTime" minOccurs="0">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Payer" type="ebl:EmailAddressType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Receiver" type="ebl:EmailAddressType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="ReceiptID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="TransactionID" type="ebl:TransactionId" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="ProfileID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="PayerName" type="ebl:PersonNameType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="AuctionItemNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="InvoiceID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="CardNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <element name="TransactionClass" type="ebl:PaymentTransactionClassCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="CurrencyCode" type="ebl:CurrencyCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Status" type="ebl:PaymentTransactionStatusCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="TransactionSearchResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:PaymentTransactions" minOccurs="0" maxOccurs="unbounded">
+                                <annotation>
+                                    <documentation>Results of a Transaction Search.</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="MassPayRequest" type="ns:MassPayRequestType"/>
+            <element name="MassPayResponse" type="ns:MassPayResponseType"/>
+            <element name="MassPayReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:MassPayRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="MassPayRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="EmailSubject" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="ReceiverType" type="ebl:ReceiverInfoCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required. </b>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="ButtonSource" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="MassPayItem" type="ns:MassPayRequestItemType" minOccurs="1" maxOccurs="250">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="MassPayResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+				</extension>
+                </complexContent>
+            </complexType>
+            <complexType name="MassPayRequestItemType">
+                <annotation>
+                    <documentation>
+					MassPayRequestItemType
+				</documentation>
+                </annotation>
+                <sequence>
+                    <element name="ReceiverEmail" type="ebl:EmailAddressType" minOccurs="0" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <b>Required</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                    <element name="ReceiverPhone" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <b>Required</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                    <element name="ReceiverID" type="ebl:UserIDType" minOccurs="0" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <b>Required</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                    <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <b>Required</b>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                    <element name="UniqueId" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                    <element name="Note" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <annotation>
+                            <documentation>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </documentation>
+                        </annotation>
+                    </element>
+                </sequence>
+            </complexType>
+            <element name="BAUpdateRequest" type="ns:BAUpdateRequestType"/>
+            <element name="BAUpdateResponse" type="ns:BAUpdateResponseType"/>
+            <element name="BillAgreementUpdateReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:BAUpdateRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="BAUpdateRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="ReferenceID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                            <element name="BillingAgreementDescription" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                            <element name="BillingAgreementStatus" type="ebl:MerchantPullStatusCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                            <element name="BillingAgreementCustom" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="BAUpdateResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:BAUpdateResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="AddressVerifyRequest" type="ns:AddressVerifyRequestType"/>
+            <element name="AddressVerifyResponse" type="ns:AddressVerifyResponseType"/>
+            <element name="AddressVerifyReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:AddressVerifyRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="AddressVerifyRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Email" type="ebl:EmailAddressType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Street" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Zip" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="AddressVerifyResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="ConfirmationCode" type="ebl:AddressStatusCodeType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="StreetMatch" type="ebl:MatchStatusCodeType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="ZipMatch" type="ebl:MatchStatusCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="CountryCode" type="ebl:CountryCodeType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>Two-character country code (ISO 3166) on file for the PayPal email address. </documentation>
+                                </annotation>
+                            </element>
+                            <element name="PayPalToken" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="EnterBoardingRequest" type="ns:EnterBoardingRequestType"/>
+            <element name="EnterBoardingResponse" type="ns:EnterBoardingResponseType"/>
+            <element name="EnterBoardingReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:EnterBoardingRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="EnterBoardingRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:EnterBoardingRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="EnterBoardingResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetBoardingDetailsRequest" type="ns:GetBoardingDetailsRequestType"/>
+            <element name="GetBoardingDetailsResponse" type="ns:GetBoardingDetailsResponseType"/>
+            <element name="GetBoardingDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetBoardingDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetBoardingDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetBoardingDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetBoardingDetailsResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="SetAuthFlowParamRequest" type="ns:SetAuthFlowParamRequestType"/>
+            <element name="SetAuthFlowParamResponse" type="ns:SetAuthFlowParamResponseType"/>
+            <element name="SetAuthFlowParamReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:SetAuthFlowParamRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SetAuthFlowParamRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:SetAuthFlowParamRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="SetAuthFlowParamResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="ebl:AuthFlowTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetAuthDetailsRequest" type="ns:GetAuthDetailsRequestType"/>
+            <element name="GetAuthDetailsResponse" type="ns:GetAuthDetailsResponseType"/>
+            <element name="GetAuthDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetAuthDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetAuthDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:AuthFlowTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetAuthDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetAuthDetailsResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="SetAccessPermissionsRequest" type="ns:SetAccessPermissionsRequestType"/>
+            <element name="SetAccessPermissionsResponse" type="ns:SetAccessPermissionsResponseType"/>
+            <element name="SetAccessPermissionsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:SetAccessPermissionsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SetAccessPermissionsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:SetAccessPermissionsRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="SetAccessPermissionsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="ebl:AuthFlowTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="UpdateAccessPermissionsRequest" type="ns:UpdateAccessPermissionsRequestType"/>
+            <element name="UpdateAccessPermissionsResponse" type="ns:UpdateAccessPermissionsResponseType"/>
+            <element name="UpdateAccessPermissionsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:UpdateAccessPermissionsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="UpdateAccessPermissionsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="PayerID" type="ebl:UserIDType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="UpdateAccessPermissionsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Status" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetAccessPermissionDetailsRequest" type="ns:GetAccessPermissionDetailsRequestType"/>
+            <element name="GetAccessPermissionDetailsResponse" type="ns:GetAccessPermissionDetailsResponseType"/>
+            <element name="GetAccessPermissionDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetAccessPermissionDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetAccessPermissionDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:AuthFlowTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetAccessPermissionDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetAccessPermissionDetailsResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="SetExpressCheckoutRequest" type="ns:SetExpressCheckoutRequestType"/>
+            <element name="SetExpressCheckoutResponse" type="ns:SetExpressCheckoutResponseType"/>
+            <element name="SetExpressCheckoutReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:SetExpressCheckoutRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SetExpressCheckoutRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:SetExpressCheckoutRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="SetExpressCheckoutResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetExpressCheckoutDetailsRequest" type="ns:GetExpressCheckoutDetailsRequestType"/>
+            <element name="GetExpressCheckoutDetailsResponse" type="ns:GetExpressCheckoutDetailsResponseType"/>
+            <element name="GetExpressCheckoutDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetExpressCheckoutDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetExpressCheckoutDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetExpressCheckoutDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetExpressCheckoutDetailsResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoExpressCheckoutPaymentRequest" type="ns:DoExpressCheckoutPaymentRequestType"/>
+            <element name="DoExpressCheckoutPaymentResponse" type="ns:DoExpressCheckoutPaymentResponseType"/>
+            <element name="DoExpressCheckoutPaymentReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoExpressCheckoutPaymentRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoExpressCheckoutPaymentRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:DoExpressCheckoutPaymentRequestDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="ReturnFMFDetails" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>This flag indicates that the response should include FMFDetails</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoExpressCheckoutPaymentResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:DoExpressCheckoutPaymentResponseDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="FMFDetails" type="ebl:FMFDetailsType" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoUATPExpressCheckoutPaymentRequest" type="ns:DoUATPExpressCheckoutPaymentRequestType"/>
+            <element name="DoUATPExpressCheckoutPaymentResponse" type="ns:DoUATPExpressCheckoutPaymentResponseType"/>
+            <element name="DoUATPExpressCheckoutPaymentReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoUATPExpressCheckoutPaymentRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoUATPExpressCheckoutPaymentRequestType">
+                <complexContent>
+                    <extension base="ns:DoExpressCheckoutPaymentRequestType">
+					</extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoUATPExpressCheckoutPaymentResponseType">
+                <complexContent>
+                    <extension base="ns:DoExpressCheckoutPaymentResponseType">
+                        <sequence>
+                            <element ref="ebl:UATPDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="ManagePendingTransactionStatusRequest" type="ns:ManagePendingTransactionStatusRequestType"/>
+            <element name="ManagePendingTransactionStatusResponse" type="ns:ManagePendingTransactionStatusResponseType"/>
+            <element name="ManagePendingTransactionStatusReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:ManagePendingTransactionStatusRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ManagePendingTransactionStatusRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="TransactionID" type="ebl:TransactionId" minOccurs="1" maxOccurs="1"/>
+                            <element name="Action" type="ebl:FMFPendingTransactionActionType" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="ManagePendingTransactionStatusResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="TransactionID" type="ebl:TransactionId" minOccurs="1" maxOccurs="1"/>
+                            <element name="Status" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoDirectPaymentRequest" type="ns:DoDirectPaymentRequestType"/>
+            <element name="DoDirectPaymentResponse" type="ns:DoDirectPaymentResponseType"/>
+            <element name="DoDirectPaymentReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoDirectPaymentRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoDirectPaymentRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:DoDirectPaymentRequestDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="ReturnFMFDetails" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>This flag indicates that the response should include FMFDetails</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoDirectPaymentResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+							The amount of the payment as specified by you on DoDirectPaymentRequest.</documentation>
+                                </annotation>
+                            </element>
+                            <element name="AVSCode" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <table>
+                                            <tr>
+                                                <th>AVS Code</th>
+                                                <th>Meaning</th>
+                                                <th>Matched Details</th>
+                                            </tr>
+                                            <tr>
+                                                <td>A </td>
+                                                <td>Address</td>
+                                                <td>Address only (no ZIP) </td>
+                                            </tr>
+                                            <tr>
+                                                <td>B </td>
+                                                <td>International “A”</td>
+                                                <td>Address only (no ZIP)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>C</td>
+                                                <td>International “N”</td>
+                                                <td> None </td>
+                                            </tr>
+                                            <tr>
+                                                <td>D</td>
+                                                <td>International “X” </td>
+                                                <td>Address and Postal Code</td>
+                                            </tr>
+                                            <tr>
+                                                <td>E </td>
+                                                <td>Not allowed for MOTO (Internet/Phone) transactions </td>
+                                                <td>Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>F </td>
+                                                <td>UK-specific “X”</td>
+                                                <td>Address and Postal Code </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G </td>
+                                                <td>Global Unavailable</td>
+                                                <td> Not applicable </td>
+                                            </tr>
+                                            <tr>
+                                                <td>I </td>
+                                                <td>International Unavailable</td>
+                                                <td>Not applicable </td>
+                                            </tr>
+                                            <tr>
+                                                <td>N </td>
+                                                <td>No</td>
+                                                <td>None</td>
+                                            </tr>
+                                            <tr>
+                                                <td>P</td>
+                                                <td>Postal (International “Z”)</td>
+                                                <td>Postal Code only (no Address) </td>
+                                            </tr>
+                                            <tr>
+                                                <td>R</td>
+                                                <td>Retry</td>
+                                                <td>Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>S </td>
+                                                <td>Service not Supported </td>
+                                                <td>Not applicable </td>
+                                            </tr>
+                                            <tr>
+                                                <td>U </td>
+                                                <td>Unavailable</td>
+                                                <td>Not applicable </td>
+                                            </tr>
+                                            <tr>
+                                                <td>W </td>
+                                                <td>Whole ZIP</td>
+                                                <td>Nine-digit ZIP code (no Address) </td>
+                                            </tr>
+                                            <tr>
+                                                <td>X </td>
+                                                <td>Exact match </td>
+                                                <td>Address and nine-digit ZIP code</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Y </td>
+                                                <td>Yes</td>
+                                                <td>Address and five-digit ZIP</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Z </td>
+                                                <td>ZIP</td>
+                                                <td> Five-digit ZIP code (no Address)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>All others </td>
+                                                <td>Error Not applicable</td>
+                                                <td/>
+                                            </tr>
+                                        </table>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="CVV2Code" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <table>
+                                            <tr>
+                                                <th>CVV2 Code</th>
+                                                <th>Meaning</th>
+                                                <th>Matched Details</th>
+                                            </tr>
+                                            <tr>
+                                                <td>M </td>
+                                                <td>Match</td>
+                                                <td>CVV2 </td>
+                                            </tr>
+                                            <tr>
+                                                <td>N </td>
+                                                <td>No match </td>
+                                                <td>None</td>
+                                            </tr>
+                                            <tr>
+                                                <td>P </td>
+                                                <td>Not Processed</td>
+                                                <td>Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>S</td>
+                                                <td>Service not Supported</td>
+                                                <td>Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>U </td>
+                                                <td>Unavailable</td>
+                                                <td>Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>X</td>
+                                                <td>No response</td>
+                                                <td>  Not applicable</td>
+                                            </tr>
+                                            <tr>
+                                                <td>All others </td>
+                                                <td>Error</td>
+                                                <td>Not applicable </td>
+                                            </tr>
+                                        </table>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="TransactionID" type="ebl:TransactionId" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="PendingReason" type="ebl:PendingStatusCodeType" minOccurs="0">
+                                <annotation>
+							The reason why a particular transaction went in pending.
+							</annotation>
+                            </element>
+                            <element name="PaymentStatus" type="ebl:PaymentStatusCodeType" minOccurs="0">
+                                <annotation>
+							This will identify the actual transaction status.
+							</annotation>
+                            </element>
+                            <element name="FMFDetails" type="ebl:FMFDetailsType" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoCaptureRequest" type="ns:DoCaptureRequestType"/>
+            <element name="DoCaptureResponse" type="ns:DoCaptureResponseType"/>
+            <element name="DoCaptureReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoCaptureRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoCaptureRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="AuthorizationID" type="ebl:AuthorizationId" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="CompleteType" type="ebl:CompleteCodeType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Note" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="InvoiceID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element ref="ebl:EnhancedData" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Not Required</b>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Descriptor" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <b>Optional</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoCaptureResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:DoCaptureResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoReauthorizationRequest" type="ns:DoReauthorizationRequestType"/>
+            <element name="DoReauthorizationResponse" type="ns:DoReauthorizationResponseType"/>
+            <element name="DoReauthorizationReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoReauthorizationRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoReauthorizationRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="AuthorizationID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoReauthorizationResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="AuthorizationID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element ref="ebl:AuthorizationInfo" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoVoidRequest" type="ns:DoVoidRequestType"/>
+            <element name="DoVoidResponse" type="ns:DoVoidResponseType"/>
+            <element name="DoVoidReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoVoidRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoVoidRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="AuthorizationID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Note" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoVoidResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="AuthorizationID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoAuthorizationRequest" type="ns:DoAuthorizationRequestType"/>
+            <element name="DoAuthorizationResponse" type="ns:DoAuthorizationResponseType"/>
+            <element name="DoAuthorizationReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoAuthorizationRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoAuthorizationRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="TransactionID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="TransactionEntity" type="ebl:TransactionEntityType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <b>Order</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoAuthorizationResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="TransactionID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>The amount and currency you specified in the request. 
+</documentation>
+                                </annotation>
+                            </element>
+                            <element ref="ebl:AuthorizationInfo" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoUATPAuthorizationRequest" type="ns:DoUATPAuthorizationRequestType"/>
+            <element name="DoUATPAuthorizationResponse" type="ns:DoUATPAuthorizationResponseType"/>
+            <element name="DoUATPAuthorizationReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoUATPAuthorizationRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoUATPAuthorizationRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:UATPDetails" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="TransactionEntity" type="ebl:TransactionEntityType" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <b>Order</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="Amount" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="InvoiceID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation> Invoice ID. A pass through.
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoUATPAuthorizationResponseType">
+                <complexContent>
+                    <extension base="ns:DoAuthorizationResponseType">
+                        <sequence>
+                            <element ref="ebl:UATPDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="AuthorizationCode" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation> Auth Authorization Code.
+									</documentation>
+                                </annotation>
+                            </element>
+                            <element name="InvoiceID" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation> Invoice ID. A pass through.
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="CreateMobilePaymentRequest" type="ns:CreateMobilePaymentRequestType"/>
+            <element name="CreateMobilePaymentResponse" type="ns:CreateMobilePaymentResponseType"/>
+            <element name="CreateMobilePaymentReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:CreateMobilePaymentRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CreateMobilePaymentRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:CreateMobilePaymentRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="CreateMobilePaymentResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+						</sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetMobileStatusRequest" type="ns:GetMobileStatusRequestType"/>
+            <element name="GetMobileStatusResponse" type="ns:GetMobileStatusResponseType"/>
+            <element name="GetMobileStatusReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetMobileStatusRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetMobileStatusRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:GetMobileStatusRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetMobileStatusResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="IsActivated" type="xs:integer" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                            <element name="PaymentPending" type="xs:integer" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="SetMobileCheckoutRequest" type="ns:SetMobileCheckoutRequestType"/>
+            <element name="SetMobileCheckoutResponse" type="ns:SetMobileCheckoutResponseType"/>
+            <element name="SetMobileCheckoutReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:SetMobileCheckoutRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SetMobileCheckoutRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:SetMobileCheckoutRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="SetMobileCheckoutResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoMobileCheckoutPaymentRequest" type="ns:DoMobileCheckoutPaymentRequestType"/>
+            <element name="DoMobileCheckoutPaymentResponse" type="ns:DoMobileCheckoutPaymentResponseType"/>
+            <element name="DoMobileCheckoutPaymentReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoMobileCheckoutPaymentRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoMobileCheckoutPaymentRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+                                        <br/>
+                                        <br/>
+                                        <b>Required</b>
+                                        <br/>
+                                        <br/>
+                                    </documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoMobileCheckoutPaymentResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:DoMobileCheckoutPaymentResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetBalanceRequest" type="ns:GetBalanceRequestType"/>
+            <element name="GetBalanceResponse" type="ns:GetBalanceResponseType"/>
+            <element name="GetBalanceReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetBalanceRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetBalanceRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="ReturnAllCurrencies" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetBalanceResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Balance" type="cc:BasicAmountType" minOccurs="1" maxOccurs="1"/>
+                            <element name="BalanceTimeStamp" type="xs:dateTime" minOccurs="1" maxOccurs="1"/>
+                            <element name="BalanceHoldings" type="cc:BasicAmountType" minOccurs="0" maxOccurs="unbounded"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="SetCustomerBillingAgreementRequest" type="ns:SetCustomerBillingAgreementRequestType"/>
+            <element name="SetCustomerBillingAgreementResponse" type="ns:SetCustomerBillingAgreementResponseType"/>
+            <element name="SetCustomerBillingAgreementReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:SetCustomerBillingAgreementRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SetCustomerBillingAgreementRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:SetCustomerBillingAgreementRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="SetCustomerBillingAgreementResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetBillingAgreementCustomerDetailsRequest" type="ns:GetBillingAgreementCustomerDetailsRequestType"/>
+            <element name="GetBillingAgreementCustomerDetailsResponse" type="ns:GetBillingAgreementCustomerDetailsResponseType"/>
+            <element name="GetBillingAgreementCustomerDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetBillingAgreementCustomerDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetBillingAgreementCustomerDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetBillingAgreementCustomerDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetBillingAgreementCustomerDetailsResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="CreateBillingAgreementRequest" type="ns:CreateBillingAgreementRequestType"/>
+            <element name="CreateBillingAgreementResponse" type="ns:CreateBillingAgreementResponseType"/>
+            <element name="CreateBillingAgreementReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:CreateBillingAgreementRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CreateBillingAgreementRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="Token" type="ebl:ExpressCheckoutTokenType" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="CreateBillingAgreementResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="BillingAgreementID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoReferenceTransactionRequest" type="ns:DoReferenceTransactionRequestType"/>
+            <element name="DoReferenceTransactionResponse" type="ns:DoReferenceTransactionResponseType"/>
+            <element name="DoReferenceTransactionReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoReferenceTransactionRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoReferenceTransactionRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:DoReferenceTransactionRequestDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="ReturnFMFDetails" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <annotation>
+                                    <documentation>This flag indicates that the response should include FMFDetails</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoReferenceTransactionResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:DoReferenceTransactionResponseDetails" minOccurs="1" maxOccurs="1"/>
+                            <element name="FMFDetails" type="ebl:FMFDetailsType" minOccurs="0" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DoNonReferencedCreditRequest" type="ns:DoNonReferencedCreditRequestType"/>
+            <element name="DoNonReferencedCreditResponse" type="ns:DoNonReferencedCreditResponseType"/>
+            <element name="DoNonReferencedCreditReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:DoNonReferencedCreditRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="DoNonReferencedCreditRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:DoNonReferencedCreditRequestDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="DoNonReferencedCreditResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:DoNonReferencedCreditResponseDetails" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="CreateRecurringPaymentsProfileRequest" type="ns:CreateRecurringPaymentsProfileRequestType"/>
+            <element name="CreateRecurringPaymentsProfileResponse" type="ns:CreateRecurringPaymentsProfileResponseType"/>
+            <element name="CreateRecurringPaymentsProfileReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:CreateRecurringPaymentsProfileRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CreateRecurringPaymentsProfileRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:CreateRecurringPaymentsProfileRequestDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="CreateRecurringPaymentsProfileResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:CreateRecurringPaymentsProfileResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetRecurringPaymentsProfileDetailsRequest" type="ns:GetRecurringPaymentsProfileDetailsRequestType"/>
+            <element name="GetRecurringPaymentsProfileDetailsResponse" type="ns:GetRecurringPaymentsProfileDetailsResponseType"/>
+            <element name="GetRecurringPaymentsProfileDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetRecurringPaymentsProfileDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetRecurringPaymentsProfileDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element name="ProfileID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                <annotation>
+                                    <documentation>
+									</documentation>
+                                </annotation>
+                            </element>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetRecurringPaymentsProfileDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:GetRecurringPaymentsProfileDetailsResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="ManageRecurringPaymentsProfileStatusRequest" type="ns:ManageRecurringPaymentsProfileStatusRequestType"/>
+            <element name="ManageRecurringPaymentsProfileStatusResponse" type="ns:ManageRecurringPaymentsProfileStatusResponseType"/>
+            <element name="ManageRecurringPaymentsProfileStatusReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:ManageRecurringPaymentsProfileStatusRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ManageRecurringPaymentsProfileStatusRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:ManageRecurringPaymentsProfileStatusRequestDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="ManageRecurringPaymentsProfileStatusResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:ManageRecurringPaymentsProfileStatusResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="BillOutstandingAmountRequest" type="ns:BillOutstandingAmountRequestType"/>
+            <element name="BillOutstandingAmountResponse" type="ns:BillOutstandingAmountResponseType"/>
+            <element name="BillOutstandingAmountReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:BillOutstandingAmountRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="BillOutstandingAmountRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:BillOutstandingAmountRequestDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="BillOutstandingAmountResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:BillOutstandingAmountResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="UpdateRecurringPaymentsProfileRequest" type="ns:UpdateRecurringPaymentsProfileRequestType"/>
+            <element name="UpdateRecurringPaymentsProfileResponse" type="ns:UpdateRecurringPaymentsProfileResponseType"/>
+            <element name="UpdateRecurringPaymentsProfileReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:UpdateRecurringPaymentsProfileRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="UpdateRecurringPaymentsProfileRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+                            <element ref="ebl:UpdateRecurringPaymentsProfileRequestDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="UpdateRecurringPaymentsProfileResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element ref="ebl:UpdateRecurringPaymentsProfileResponseDetails"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="GetPalDetailsRequest" type="ns:GetPalDetailsRequestType"/>
+            <element name="GetPalDetailsResponse" type="ns:GetPalDetailsResponseType"/>
+            <element name="GetPalDetailsReq">
+                <complexType>
+                    <sequence>
+                        <element ref="ns:GetPalDetailsRequest"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="GetPalDetailsRequestType">
+                <complexContent>
+                    <extension base="ebl:AbstractRequestType">
+                        <sequence>
+						</sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GetPalDetailsResponseType">
+                <complexContent>
+                    <extension base="ebl:AbstractResponseType">
+                        <sequence>
+                            <element name="Pal" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <element name="Locale" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+        </schema>
+    </types>
+    <message name="RequesterCredentials">
+        <part name="RequesterCredentials" element="ns:RequesterCredentials"/>
+    </message>
+    <message name="RefundTransactionRequest">
+        <part name="RefundTransactionRequest" element="ns:RefundTransactionReq"/>
+    </message>
+    <message name="RefundTransactionResponse">
+        <part name="RefundTransactionResponse" element="ns:RefundTransactionResponse"/>
+    </message>
+    <message name="GetTransactionDetailsRequest">
+        <part name="GetTransactionDetailsRequest" element="ns:GetTransactionDetailsReq"/>
+    </message>
+    <message name="GetTransactionDetailsResponse">
+        <part name="GetTransactionDetailsResponse" element="ns:GetTransactionDetailsResponse"/>
+    </message>
+    <message name="BillUserRequest">
+        <part name="BillUserRequest" element="ns:BillUserReq"/>
+    </message>
+    <message name="BillUserResponse">
+        <part name="BillUserResponse" element="ns:BillUserResponse"/>
+    </message>
+    <message name="TransactionSearchRequest">
+        <part name="TransactionSearchRequest" element="ns:TransactionSearchReq"/>
+    </message>
+    <message name="TransactionSearchResponse">
+        <part name="TransactionSearchResponse" element="ns:TransactionSearchResponse"/>
+    </message>
+    <message name="MassPayRequest">
+        <part name="MassPayRequest" element="ns:MassPayReq"/>
+    </message>
+    <message name="MassPayResponse">
+        <part name="MassPayResponse" element="ns:MassPayResponse"/>
+    </message>
+    <message name="BillAgreementUpdateRequest">
+        <part name="BillAgreementUpdateRequest" element="ns:BillAgreementUpdateReq"/>
+    </message>
+    <message name="BAUpdateResponse">
+        <part name="body" element="ns:BAUpdateResponse"/>
+    </message>
+    <message name="AddressVerifyRequest">
+        <part name="AddressVerifyRequest" element="ns:AddressVerifyReq"/>
+    </message>
+    <message name="AddressVerifyResponse">
+        <part name="AddressVerifyResponse" element="ns:AddressVerifyResponse"/>
+    </message>
+    <message name="EnterBoardingRequest">
+        <part name="EnterBoardingRequest" element="ns:EnterBoardingReq"/>
+    </message>
+    <message name="EnterBoardingResponse">
+        <part name="EnterBoardingResponse" element="ns:EnterBoardingResponse"/>
+    </message>
+    <message name="GetBoardingDetailsRequest">
+        <part name="GetBoardingDetailsRequest" element="ns:GetBoardingDetailsReq"/>
+    </message>
+    <message name="GetBoardingDetailsResponse">
+        <part name="GetBoardingDetailsResponse" element="ns:GetBoardingDetailsResponse"/>
+    </message>
+    <message name="DoExpressCheckoutPaymentRequest">
+        <part name="DoExpressCheckoutPaymentRequest" element="ns:DoExpressCheckoutPaymentReq"/>
+    </message>
+    <message name="DoExpressCheckoutPaymentResponse">
+        <part name="DoExpressCheckoutPaymentResponse" element="ns:DoExpressCheckoutPaymentResponse"/>
+    </message>
+    <message name="DoUATPExpressCheckoutPaymentRequest">
+        <part name="DoUATPExpressCheckoutPaymentRequest" element="ns:DoUATPExpressCheckoutPaymentReq"/>
+    </message>
+    <message name="DoUATPExpressCheckoutPaymentResponse">
+        <part name="DoUATPExpressCheckoutPaymentResponse" element="ns:DoUATPExpressCheckoutPaymentResponse"/>
+    </message>
+    <message name="SetAuthFlowParamRequest">
+        <part name="SetAuthFlowParamRequest" element="ns:SetAuthFlowParamReq"/>
+    </message>
+    <message name="SetAuthFlowParamResponse">
+        <part name="SetAuthFlowParamResponse" element="ns:SetAuthFlowParamResponse"/>
+    </message>
+    <message name="GetAuthDetailsRequest">
+        <part name="GetAuthDetailsRequest" element="ns:GetAuthDetailsReq"/>
+    </message>
+    <message name="GetAuthDetailsResponse">
+        <part name="GetAuthDetailsResponse" element="ns:GetAuthDetailsResponse"/>
+    </message>
+    <message name="SetAccessPermissionsRequest">
+        <part name="SetAccessPermissionsRequest" element="ns:SetAccessPermissionsReq"/>
+    </message>
+    <message name="SetAccessPermissionsResponse">
+        <part name="SetAccessPermissionsResponse" element="ns:SetAccessPermissionsResponse"/>
+    </message>
+    <message name="UpdateAccessPermissionsRequest">
+        <part name="UpdateAccessPermissionsRequest" element="ns:UpdateAccessPermissionsReq"/>
+    </message>
+    <message name="UpdateAccessPermissionsResponse">
+        <part name="UpdateAccessPermissionsResponse" element="ns:UpdateAccessPermissionsResponse"/>
+    </message>
+    <message name="GetAccessPermissionDetailsRequest">
+        <part name="GetAccessPermissionDetailsRequest" element="ns:GetAccessPermissionDetailsReq"/>
+    </message>
+    <message name="GetAccessPermissionDetailsResponse">
+        <part name="GetAccessPermissionDetailsResponse" element="ns:GetAccessPermissionDetailsResponse"/>
+    </message>
+    <message name="SetExpressCheckoutRequest">
+        <part name="SetExpressCheckoutRequest" element="ns:SetExpressCheckoutReq"/>
+    </message>
+    <message name="SetExpressCheckoutResponse">
+        <part name="SetExpressCheckoutResponse" element="ns:SetExpressCheckoutResponse"/>
+    </message>
+    <message name="GetExpressCheckoutDetailsRequest">
+        <part name="GetExpressCheckoutDetailsRequest" element="ns:GetExpressCheckoutDetailsReq"/>
+    </message>
+    <message name="GetExpressCheckoutDetailsResponse">
+        <part name="GetExpressCheckoutDetailsResponse" element="ns:GetExpressCheckoutDetailsResponse"/>
+    </message>
+    <message name="DoDirectPaymentRequest">
+        <part name="DoDirectPaymentRequest" element="ns:DoDirectPaymentReq"/>
+    </message>
+    <message name="DoDirectPaymentResponse">
+        <part name="DoDirectPaymentResponse" element="ns:DoDirectPaymentResponse"/>
+    </message>
+    <message name="ManagePendingTransactionStatusRequest">
+        <part name="ManagePendingTransactionStatusRequest" element="ns:ManagePendingTransactionStatusReq"/>
+    </message>
+    <message name="ManagePendingTransactionStatusResponse">
+        <part name="ManagePendingTransactionStatusResponse" element="ns:ManagePendingTransactionStatusResponse"/>
+    </message>
+    <message name="DoCaptureRequest">
+        <part name="DoCaptureRequest" element="ns:DoCaptureReq"/>
+    </message>
+    <message name="DoCaptureResponse">
+        <part name="DoCaptureResponse" element="ns:DoCaptureResponse"/>
+    </message>
+    <message name="DoReauthorizationRequest">
+        <part name="DoReauthorizationRequest" element="ns:DoReauthorizationReq"/>
+    </message>
+    <message name="DoReauthorizationResponse">
+        <part name="DoReauthorizationResponse" element="ns:DoReauthorizationResponse"/>
+    </message>
+    <message name="DoVoidRequest">
+        <part name="DoVoidRequest" element="ns:DoVoidReq"/>
+    </message>
+    <message name="DoVoidResponse">
+        <part name="DoVoidResponse" element="ns:DoVoidResponse"/>
+    </message>
+    <message name="DoAuthorizationRequest">
+        <part name="DoAuthorizationRequest" element="ns:DoAuthorizationReq"/>
+    </message>
+    <message name="DoAuthorizationResponse">
+        <part name="DoAuthorizationResponse" element="ns:DoAuthorizationResponse"/>
+    </message>
+    <message name="DoUATPAuthorizationRequest">
+        <part name="DoUATPAuthorizationRequest" element="ns:DoUATPAuthorizationReq"/>
+    </message>
+    <message name="DoUATPAuthorizationResponse">
+        <part name="DoUATPAuthorizationResponse" element="ns:DoUATPAuthorizationResponse"/>
+    </message>
+    <message name="CreateMobilePaymentRequest">
+        <part name="CreateMobilePaymentRequest" element="ns:CreateMobilePaymentReq"/>
+    </message>
+    <message name="CreateMobilePaymentResponse">
+        <part name="CreateMobilePaymentResponse" element="ns:CreateMobilePaymentResponse"/>
+    </message>
+    <message name="GetMobileStatusRequest">
+        <part name="GetMobileStatusRequest" element="ns:GetMobileStatusReq"/>
+    </message>
+    <message name="GetMobileStatusResponse">
+        <part name="GetMobileStatusResponse" element="ns:GetMobileStatusResponse"/>
+    </message>
+    <message name="SetCustomerBillingAgreementRequest">
+        <part name="SetCustomerBillingAgreementRequest" element="ns:SetCustomerBillingAgreementReq"/>
+    </message>
+    <message name="SetCustomerBillingAgreementResponse">
+        <part name="SetCustomerBillingAgreementResponse" element="ns:SetCustomerBillingAgreementResponse"/>
+    </message>
+    <message name="GetBillingAgreementCustomerDetailsRequest">
+        <part name="GetBillingAgreementCustomerDetailsRequest" element="ns:GetBillingAgreementCustomerDetailsReq"/>
+    </message>
+    <message name="GetBillingAgreementCustomerDetailsResponse">
+        <part name="GetBillingAgreementCustomerDetailsResponse" element="ns:GetBillingAgreementCustomerDetailsResponse"/>
+    </message>
+    <message name="CreateBillingAgreementRequest">
+        <part name="CreateBillingAgreementRequest" element="ns:CreateBillingAgreementReq"/>
+    </message>
+    <message name="CreateBillingAgreementResponse">
+        <part name="CreateBillingAgreementResponse" element="ns:CreateBillingAgreementResponse"/>
+    </message>
+    <message name="DoReferenceTransactionRequest">
+        <part name="DoReferenceTransactionRequest" element="ns:DoReferenceTransactionReq"/>
+    </message>
+    <message name="DoReferenceTransactionResponse">
+        <part name="DoReferenceTransactionResponse" element="ns:DoReferenceTransactionResponse"/>
+    </message>
+    <message name="DoNonReferencedCreditRequest">
+        <part name="DoNonReferencedCreditRequest" element="ns:DoNonReferencedCreditReq"/>
+    </message>
+    <message name="DoNonReferencedCreditResponse">
+        <part name="DoNonReferencedCreditResponse" element="ns:DoNonReferencedCreditResponse"/>
+    </message>
+    <message name="SetMobileCheckoutRequest">
+        <part name="SetMobileCheckoutRequest" element="ns:SetMobileCheckoutReq"/>
+    </message>
+    <message name="SetMobileCheckoutResponse">
+        <part name="SetMobileCheckoutResponse" element="ns:SetMobileCheckoutResponse"/>
+    </message>
+    <message name="DoMobileCheckoutPaymentRequest">
+        <part name="DoMobileCheckoutPaymentRequest" element="ns:DoMobileCheckoutPaymentReq"/>
+    </message>
+    <message name="DoMobileCheckoutPaymentResponse">
+        <part name="DoMobileCheckoutPaymentResponse" element="ns:DoMobileCheckoutPaymentResponse"/>
+    </message>
+    <message name="GetBalanceRequest">
+        <part name="GetBalanceRequest" element="ns:GetBalanceReq"/>
+    </message>
+    <message name="GetBalanceResponse">
+        <part name="GetBalanceResponse" element="ns:GetBalanceResponse"/>
+    </message>
+    <message name="GetPalDetailsRequest">
+        <part name="GetPalDetailsRequest" element="ns:GetPalDetailsReq"/>
+    </message>
+    <message name="GetPalDetailsResponse">
+        <part name="GetPalDetailsResponse" element="ns:GetPalDetailsResponse"/>
+    </message>
+    <message name="CreateRecurringPaymentsProfileRequest">
+        <part name="CreateRecurringPaymentsProfileRequest" element="ns:CreateRecurringPaymentsProfileReq"/>
+    </message>
+    <message name="CreateRecurringPaymentsProfileResponse">
+        <part name="CreateRecurringPaymentsProfileResponse" element="ns:CreateRecurringPaymentsProfileResponse"/>
+    </message>
+    <message name="GetRecurringPaymentsProfileDetailsRequest">
+        <part name="GetRecurringPaymentsProfileDetailsRequest" element="ns:GetRecurringPaymentsProfileDetailsReq"/>
+    </message>
+    <message name="GetRecurringPaymentsProfileDetailsResponse">
+        <part name="GetRecurringPaymentsProfileDetailsResponse" element="ns:GetRecurringPaymentsProfileDetailsResponse"/>
+    </message>
+    <message name="ManageRecurringPaymentsProfileStatusRequest">
+        <part name="ManageRecurringPaymentsProfileStatusRequest" element="ns:ManageRecurringPaymentsProfileStatusReq"/>
+    </message>
+    <message name="ManageRecurringPaymentsProfileStatusResponse">
+        <part name="ManageRecurringPaymentsProfileStatusResponse" element="ns:ManageRecurringPaymentsProfileStatusResponse"/>
+    </message>
+    <message name="BillOutstandingAmountRequest">
+        <part name="BillOutstandingAmountRequest" element="ns:BillOutstandingAmountReq"/>
+    </message>
+    <message name="BillOutstandingAmountResponse">
+        <part name="BillOutstandingAmountResponse" element="ns:BillOutstandingAmountResponse"/>
+    </message>
+    <message name="UpdateRecurringPaymentsProfileRequest">
+        <part name="UpdateRecurringPaymentsProfileRequest" element="ns:UpdateRecurringPaymentsProfileReq"/>
+    </message>
+    <message name="UpdateRecurringPaymentsProfileResponse">
+        <part name="UpdateRecurringPaymentsProfileResponse" element="ns:UpdateRecurringPaymentsProfileResponse"/>
+    </message>
+    <portType name="PayPalAPIInterface">
+        <operation name="RefundTransaction">
+            <input message="ns:RefundTransactionRequest"/>
+            <output message="ns:RefundTransactionResponse"/>
+        </operation>
+        <operation name="GetTransactionDetails">
+            <input message="ns:GetTransactionDetailsRequest"/>
+            <output message="ns:GetTransactionDetailsResponse"/>
+        </operation>
+        <operation name="BillUser">
+            <input message="ns:BillUserRequest"/>
+            <output message="ns:BillUserResponse"/>
+        </operation>
+        <operation name="TransactionSearch">
+            <input message="ns:TransactionSearchRequest"/>
+            <output message="ns:TransactionSearchResponse"/>
+        </operation>
+        <operation name="MassPay">
+            <input message="ns:MassPayRequest"/>
+            <output message="ns:MassPayResponse"/>
+        </operation>
+        <operation name="BillAgreementUpdate">
+            <input message="ns:BillAgreementUpdateRequest"/>
+            <output message="ns:BAUpdateResponse"/>
+        </operation>
+        <operation name="AddressVerify">
+            <input message="ns:AddressVerifyRequest"/>
+            <output message="ns:AddressVerifyResponse"/>
+        </operation>
+        <operation name="EnterBoarding">
+            <input message="ns:EnterBoardingRequest"/>
+            <output message="ns:EnterBoardingResponse"/>
+        </operation>
+        <operation name="GetBoardingDetails">
+            <input message="ns:GetBoardingDetailsRequest"/>
+            <output message="ns:GetBoardingDetailsResponse"/>
+        </operation>
+        <operation name="CreateMobilePayment">
+            <input message="ns:CreateMobilePaymentRequest"/>
+            <output message="ns:CreateMobilePaymentResponse"/>
+        </operation>
+        <operation name="GetMobileStatus">
+            <input message="ns:GetMobileStatusRequest"/>
+            <output message="ns:GetMobileStatusResponse"/>
+        </operation>
+        <operation name="SetMobileCheckout">
+            <input message="ns:SetMobileCheckoutRequest"/>
+            <output message="ns:SetMobileCheckoutResponse"/>
+        </operation>
+        <operation name="DoMobileCheckoutPayment">
+            <input message="ns:DoMobileCheckoutPaymentRequest"/>
+            <output message="ns:DoMobileCheckoutPaymentResponse"/>
+        </operation>
+        <operation name="GetBalance">
+            <input message="ns:GetBalanceRequest"/>
+            <output message="ns:GetBalanceResponse"/>
+        </operation>
+        <operation name="GetPalDetails">
+            <input message="ns:GetPalDetailsRequest"/>
+            <output message="ns:GetPalDetailsResponse"/>
+        </operation>
+    </portType>
+    <portType name="PayPalAPIAAInterface">
+        <operation name="DoExpressCheckoutPayment">
+            <input message="ns:DoExpressCheckoutPaymentRequest"/>
+            <output message="ns:DoExpressCheckoutPaymentResponse"/>
+        </operation>
+        <operation name="DoUATPExpressCheckoutPayment">
+            <input message="ns:DoUATPExpressCheckoutPaymentRequest"/>
+            <output message="ns:DoUATPExpressCheckoutPaymentResponse"/>
+        </operation>
+        <operation name="SetAuthFlowParam">
+            <input message="ns:SetAuthFlowParamRequest"/>
+            <output message="ns:SetAuthFlowParamResponse"/>
+        </operation>
+        <operation name="GetAuthDetails">
+            <input message="ns:GetAuthDetailsRequest"/>
+            <output message="ns:GetAuthDetailsResponse"/>
+        </operation>
+        <operation name="SetAccessPermissions">
+            <input message="ns:SetAccessPermissionsRequest"/>
+            <output message="ns:SetAccessPermissionsResponse"/>
+        </operation>
+        <operation name="UpdateAccessPermissions">
+            <input message="ns:UpdateAccessPermissionsRequest"/>
+            <output message="ns:UpdateAccessPermissionsResponse"/>
+        </operation>
+        <operation name="GetAccessPermissionDetails">
+            <input message="ns:GetAccessPermissionDetailsRequest"/>
+            <output message="ns:GetAccessPermissionDetailsResponse"/>
+        </operation>
+        <operation name="SetExpressCheckout">
+            <input message="ns:SetExpressCheckoutRequest"/>
+            <output message="ns:SetExpressCheckoutResponse"/>
+        </operation>
+        <operation name="GetExpressCheckoutDetails">
+            <input message="ns:GetExpressCheckoutDetailsRequest"/>
+            <output message="ns:GetExpressCheckoutDetailsResponse"/>
+        </operation>
+        <operation name="DoDirectPayment">
+            <input message="ns:DoDirectPaymentRequest"/>
+            <output message="ns:DoDirectPaymentResponse"/>
+        </operation>
+        <operation name="ManagePendingTransactionStatus">
+            <input message="ns:ManagePendingTransactionStatusRequest"/>
+            <output message="ns:ManagePendingTransactionStatusResponse"/>
+        </operation>
+        <operation name="DoCapture">
+            <input message="ns:DoCaptureRequest"/>
+            <output message="ns:DoCaptureResponse"/>
+        </operation>
+        <operation name="DoReauthorization">
+            <input message="ns:DoReauthorizationRequest"/>
+            <output message="ns:DoReauthorizationResponse"/>
+        </operation>
+        <operation name="DoVoid">
+            <input message="ns:DoVoidRequest"/>
+            <output message="ns:DoVoidResponse"/>
+        </operation>
+        <operation name="DoAuthorization">
+            <input message="ns:DoAuthorizationRequest"/>
+            <output message="ns:DoAuthorizationResponse"/>
+        </operation>
+        <operation name="SetCustomerBillingAgreement">
+            <input message="ns:SetCustomerBillingAgreementRequest"/>
+            <output message="ns:SetCustomerBillingAgreementResponse"/>
+        </operation>
+        <operation name="GetBillingAgreementCustomerDetails">
+            <input message="ns:GetBillingAgreementCustomerDetailsRequest"/>
+            <output message="ns:GetBillingAgreementCustomerDetailsResponse"/>
+        </operation>
+        <operation name="CreateBillingAgreement">
+            <input message="ns:CreateBillingAgreementRequest"/>
+            <output message="ns:CreateBillingAgreementResponse"/>
+        </operation>
+        <operation name="DoReferenceTransaction">
+            <input message="ns:DoReferenceTransactionRequest"/>
+            <output message="ns:DoReferenceTransactionResponse"/>
+        </operation>
+        <operation name="DoNonReferencedCredit">
+            <input message="ns:DoNonReferencedCreditRequest"/>
+            <output message="ns:DoNonReferencedCreditResponse"/>
+        </operation>
+        <operation name="DoUATPAuthorization">
+            <input message="ns:DoUATPAuthorizationRequest"/>
+            <output message="ns:DoUATPAuthorizationResponse"/>
+        </operation>
+        <operation name="CreateRecurringPaymentsProfile">
+            <input message="ns:CreateRecurringPaymentsProfileRequest"/>
+            <output message="ns:CreateRecurringPaymentsProfileResponse"/>
+        </operation>
+        <operation name="GetRecurringPaymentsProfileDetails">
+            <input message="ns:GetRecurringPaymentsProfileDetailsRequest"/>
+            <output message="ns:GetRecurringPaymentsProfileDetailsResponse"/>
+        </operation>
+        <operation name="ManageRecurringPaymentsProfileStatus">
+            <input message="ns:ManageRecurringPaymentsProfileStatusRequest"/>
+            <output message="ns:ManageRecurringPaymentsProfileStatusResponse"/>
+        </operation>
+        <operation name="BillOutstandingAmount">
+            <input message="ns:BillOutstandingAmountRequest"/>
+            <output message="ns:BillOutstandingAmountResponse"/>
+        </operation>
+        <operation name="UpdateRecurringPaymentsProfile">
+            <input message="ns:UpdateRecurringPaymentsProfileRequest"/>
+            <output message="ns:UpdateRecurringPaymentsProfileResponse"/>
+        </operation>
+    </portType>
+    <binding name="PayPalAPISoapBinding" type="ns:PayPalAPIInterface">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="RefundTransaction">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetTransactionDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="BillUser">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="TransactionSearch">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="MassPay">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="BillAgreementUpdate">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="AddressVerify">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="EnterBoarding">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetBoardingDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="CreateMobilePayment">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetMobileStatus">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetMobileCheckout">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoMobileCheckoutPayment">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetBalance">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header use="literal" message="ns:RequesterCredentials" part="RequesterCredentials"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header use="literal" message="ns:RequesterCredentials" part="RequesterCredentials"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetPalDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <binding name="PayPalAPIAASoapBinding" type="ns:PayPalAPIAAInterface">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="DoExpressCheckoutPayment">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoUATPExpressCheckoutPayment">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetAuthFlowParam">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetAuthDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetAccessPermissions">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="UpdateAccessPermissions">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetAccessPermissionDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetExpressCheckout">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetExpressCheckoutDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoDirectPayment">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="ManagePendingTransactionStatus">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoCapture">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoReauthorization">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoVoid">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoAuthorization">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoUATPAuthorization">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SetCustomerBillingAgreement">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetBillingAgreementCustomerDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="CreateBillingAgreement">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoReferenceTransaction">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="CreateRecurringPaymentsProfile">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetRecurringPaymentsProfileDetails">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="ManageRecurringPaymentsProfileStatus">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="BillOutstandingAmount">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="UpdateRecurringPaymentsProfile">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DoNonReferencedCredit">
+            <wsdlsoap:operation/>
+            <input>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </input>
+            <output>
+                <wsdlsoap:header message="ns:RequesterCredentials" part="RequesterCredentials" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="PayPalAPIInterfaceService">
+        <port name="PayPalAPI" binding="ns:PayPalAPISoapBinding">
+            <wsdlsoap:address location="https://api.sandbox.paypal.com/2.0/"/>
+        </port>
+        <port name="PayPalAPIAA" binding="ns:PayPalAPIAASoapBinding">
+            <wsdlsoap:address location="https://api-aa.sandbox.paypal.com/2.0/"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Customer">
+
+	<resultMap id="orderMap" class="com.ebiz.data.Order">
+		<result property="orderId" column="order_id"/>
+		<result property="payment" column="Order.paymentMap"/>
+		<result property="customer" resultMap="Order.customerMap"/>
+		<result property="shipping" column="Order.shippingMap"/>
+		<result property="productType" column="product_type"/>
+		<result property="amount" column="order_amount"/>
+		<result property="comments" column="comments"/>
+		<result property="status" column="status"/>
+		<result property="clientId" column="client_id"/>
+		<result property="createDate" column="order_create_date"/>
+	</resultMap>
+
+	<resultMap id="paymentMap" class="com.ebiz.data.Payment">
+		<result property="paymentId" column="payment_id"/>
+		<result property="cardHolderName" column="card_holder_name"/>
+		<result property="cardType" column="card_type"/>
+		<result property="cardNumber" column="card_number"/>
+		<result property="cardExpDate" column="card_exp_date"/>
+		<result property="cardCVV" column="card_cvv"/>
+		<result property="amount" column="payment_amount"/>
+		<result property="vendorConfNo" column="vendor_conf_no"/>
+		<result property="vendorResponse" column="vendor_response"/>
+		<result property="updateDate" column="payment_update_date"/>
+		<result property="createDate" column="payment_create_date"/>
+	</resultMap>
+
+	<resultMap id="customerMap" class="com.ebiz.data.Customer">
+		<result property="customerId" column="customer_id"/>
+		<result property="firstName" column="first_name"/>
+		<result property="lastName" column="last_name"/>
+		<result property="email" column="email"/>
+		<result property="contactPhone" column="contact_phone"/>
+		<result property="contactFax" column="contact_fax"/>
+		<result property="address1" column="bill_address1"/>
+		<result property="address2" column="bill_address2"/>
+		<result property="city" column="bill_city"/>
+		<result property="state" column="bill_state"/>
+		<result property="zip" column="bill_zip"/>
+		<result property="zip4" column="bill_zip4"/>
+		<result property="country" column="bill_country"/>
+		<result property="shipAddress1" column="ship_address1"/>
+		<result property="shipAddress2" column="ship_address2"/>
+		<result property="shipCity" column="ship_city"/>
+		<result property="shipState" column="ship_state"/>
+		<result property="shipZip" column="ship_zip"/>
+		<result property="shipZip4" column="ship_zip4"/>
+		<result property="shipCountry" column="ship_country"/>
+		<result property="createDate" column="customer_create_date"/>
+	</resultMap>
+	
+
+	<insert id="insertCustomer" parameterClass="com.ebiz.data.Customer">
+		INSERT INTO Customer 
+		( 
+			first_name, 
+			last_name, 
+			email, 
+			contact_phone, 
+			contact_fax,
+			bill_address1, 
+			bill_address2, 
+			bill_city, 
+			bill_state, 
+			bill_zip, 
+			bill_zip4, 
+			bill_country, 
+			ship_address1, 
+			ship_address2, 
+			ship_city, 
+			ship_state, 
+			ship_zip, 
+			ship_zip4,
+			ship_country, 
+			create_date 
+		) 
+		VALUES ( #firstName#,#lastName#,#email#,#contactPhone#,
+			 #contactFax#,#address1#,#address2#,#city#,
+			 #state#,#zip#,#zip4#,#country#,#shipAddress1#,
+			 #shipAddress2#,#shipCity#,#shipState#,#shipZip#,
+			 #shipZip4#,#shipCountry#,sysdate() )
+			
+		<selectKey keyProperty="customerId" resultClass="int">
+			SELECT LAST_INSERT_ID() AS Id
+		</selectKey>	
+
+	</insert>	
+	
+	<update id="updateCustomer" parameterClass="com.ebiz.data.Customer">
+		UPDATE 	Customer 
+		SET 	first_name = #firstName#, 
+		        last_name = #lastName#,
+		        email = #email#, 
+		        contact_phone = #contactPhone#,
+		        contact_fax = #contactFax#,
+	      		bill_address1 = #address1#, 
+		        bill_address2 = #address2#, 
+		        bill_city = #city#, 
+		        bill_state = #state#, 
+		        bill_zip = #zip#, 
+		        bill_zip4 = #zip4#, 
+		       	bill_country = #country#, 
+		        ship_address1 = #shipAddress1#, 
+		        ship_address2 = #shipAddress2#,
+		        ship_city = #shipCity#, 
+		        ship_state = #shipState#, 
+		        ship_zip = #shipZip#, 
+		        ship_zip4 = #shipZip4#, 
+			ship_country = #shipCountry#, 
+		        update_date = sysdate() 
+		WHERE 	customer_id = #customerId#
+	</update>	
+
+	<insert id="insertPayment" parameterClass="com.ebiz.data.Payment">
+		INSERT INTO 	Payment 
+		( 
+				card_holder_name, 
+				card_type, 
+				card_number, 
+				card_exp_date, 
+				card_cvv, 
+				amount, 
+				create_date
+		)
+		VALUES (#cardHolderName#,#cardType#,#cardNumber#,
+			#cardExpDate#,#cardCVV#,#amount#,sysdate() )
+			
+		<selectKey keyProperty="paymentId" resultClass="int">
+			SELECT LAST_INSERT_ID() AS Id
+		</selectKey>	
+
+	</insert>	
+
+	<insert id="insertOrder" parameterClass="com.ebiz.data.Order">
+		INSERT INTO 	Orders 
+		( 
+				customer_id, 
+				payment_id, 
+				product_type, 
+				amount, 
+				comments, 
+				status, 
+				client_id, 
+				create_date 
+		) 
+		VALUES ( #customer.customerId#,#payment.paymentId#,#productType#,#amount#,#comments#,#status#,#clientId#,sysdate() )
+			
+		<selectKey keyProperty="orderId" resultClass="int">
+			SELECT LAST_INSERT_ID() AS Id
+		</selectKey>	
+
+	</insert>	
+
+	<insert id="insertOrderWoodProduct" parameterClass="com.ebiz.data.OrderWoodProduct">
+		INSERT INTO 	Orders_Wood_Product 
+		( 
+				order_id, 
+				product_id, 
+				quantity, 
+				create_date 
+			)
+		VALUES ( #order.orderId#,#woodProduct.productId#,#quantity#,sysdate() )
+	</insert>	
+
+	<update id="updateOrder" parameterClass="com.ebiz.data.Order">
+		UPDATE 	Orders 
+		SET 	status = #status#,
+			confirm_no = #confirmationNo#,
+			error_code = #errorCode#,
+			error_message = #errorMessage#,
+			update_date = sysdate()
+		WHERE  	order_id = #orderId#
+	</update>	
+	
+	<update id="updatePayment" parameterClass="java.util.Map">
+		UPDATE 	Payment 
+		SET 	vendor_conf_no = #vendorConfNo#,
+			vendor_response = #vendorResponse#,
+			update_date = sysdate()
+		WHERE  	payment_id = #paymentId#
+	</update>	
+	
+	<select id="getOrder" parameterClass="int" resultClass="com.ebiz.data.Order" resultMap="orderMap">
+		SELECT 	c.customer_id, 
+			c.first_name, 
+			c.last_name, 
+			c.email, 
+			c.contact_phone, 
+			c.contact_fax, 
+			c.bill_address1, 
+			c.bill_address2, 
+			c.bill_city, 
+			c.bill_state, 
+			c.bill_zip, 
+			c.bill_zip4, 
+			c.bill_country, 
+			c.ship_address1, 
+			c.ship_address2, 
+			c.ship_city, 
+			c.ship_state, 
+			c.ship_zip, 
+			c.ship_zip4, 
+			c.ship_country, 
+			c.create_date as customer_create_date, 
+			o.order_id,
+		        o.product_type, 
+		        o.comments, 
+		        o.status, 
+		        o.client_id, 
+		        o.create_date as order_create_date, 
+		        p.payment_id, 
+		        p.card_holder_name, 
+		        p.card_type, 
+		        p.card_number, 
+			p.card_exp_date, 
+			p.card_cvv, 
+			p.amount, 
+			p.vendor_conf_no, 
+			p.vendor_response, 
+			p.update_date as payment_update_date, 
+			p.create_date as payment_create_date 
+		FROM    Customer c, 
+			Orders o, 
+			Payment p 
+		WHERE   o.customer_id = c.customer_id 
+		AND     o.payment_id = p.payment_id  
+		AND     o.order_id = #orderId#
+	</select>
+	
+</sqlMap>

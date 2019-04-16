@@ -5,31 +5,29 @@ eCommerce is plain old java project with jsp pages to create a shopping cart app
 
 
 # Setup
-  - Import a HTML file and watch it magically convert to Markdown
-  - Drag and drop images (requires your Dropbox account be linked)
+  - Run Table.sql
+  - Run currency.sql
+  - Run wood_category.sql
+  - Run wood_product.sql
+  - Run pricing
+  - Run quanity.sql to update real product quantity from our warehouse inventory.
+
+
+# ENCRYPTION
+
+  - Take input string
+  - Use Base64 (encrypt/decrypt)
+  - Use crypto (encrypt/decrypt)
+  - Sample: 
+  	java test.security.CryptoTest crypto encrypt "eBiz is a global trading company for both import and export" "DES" "brando_1236904149_biz_api1.yahoo.com"
+  	java test.security.CryptoTest base64 encrypt "eBiz is a global trading company for both import and export"
+	java test.security.CryptoTest crypto decrypt "eBiz is a global trading company for both import and export" "DES" "mh0Va/SgAqF3w7Ect2/SsQ=="
 
 ### Dependencies
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
-
-### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
+* [MySQL] - Database to host product catalog
+* [Java lib] - Libraries included in the project already
+* [Web Server] - Install any webserver running JSP pages ie. Tomcat
 ```
 
 
@@ -37,5 +35,5 @@ $ node app
 License
 ----
 
-MIT
+None
 

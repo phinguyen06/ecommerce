@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<project name="ebiz" default="jar" basedir=".">
+
+  <property name="lib.dir"          value="." />
+  <property name="java.src.dir"      value="src" />
+  <property name="classes.dest.dir"    value="classes" />
+  <property name="dist.dest.dir"    value="dist" />
+  <property name="javadoc.dest.dir"      value="${docs.dest.dir}/api" />
+  <property name="pkgnames"        value="com.*" />
+
+  <property name="testclass"       value="test.AllTests" />
+  <!-- <property name="junitrunclass"   value="junit.awtui.TestRunner" /> -->
+  <!-- <property name="junitrunclass"   value="junit.swingui.TestRunner" /> -->
+  <!--  <property name="junitrunclass"   value="junit.textui.TestRunner" /> -->
+
+  <property name="junitrunclass"   value="junit.swingui.TestRunner" />
+
+  <property name="copyright"       value="Copyright &#169; 2004 T-Mobile" />
+
+  <path id="project.class.path">
+    <pathelement location="${classes.dest.dir}"/>
+    <fileset dir="${lib.dir}">
+      <include name="*.jar"/>
+      <include name="*.zip"/>
+    </fileset>
+    <pathelement location="${lib.dir}"/>
+  </path>
+
+
+  <!-- Compile the source code  -->
+  <target name="build">
+    <delete dir="${classes.dest.dir}"/>
+    <mkdir dir="${classes.dest.dir}"/>
+    <javac
+      destdir="${classes.dest.dir}"
+      debug="true">
+      <src path="${java.src.dir}" />
+      <classpath refid="project.class.path" />
+    </javac>
+  </target>
+
+
+  <!-- ==================== Compile the source code ==================== -->
+  <target name="buildall">
+    <delete dir="${classes.dest.dir}"/>
+    <delete dir="${dist.dest.dir}"/>
+    <mkdir dir="${dist.dest.dir}"/>
+    <antcall target="build"/>
+  </target>
+
+  <target name="jar">
+    <antcall target="buildall"/>
+    <!-- make the project jar file in the target ear staging directory -->
+    <jar jarfile="${dist.dest.dir}/${ant.project.name}.jar"
+          basedir="${classes.dest.dir}"
+          includes="**/*">
+      <manifest>
+        <attribute name="Built-By" value="T-Mobile"/>
+        <attribute name="Class-Path" value="${manifest.ClassPath.value}"/>
+      </manifest>
+    </jar>    
+  </target>
+
+  <!-- Javadoc the source code  -->
+  
+  <target name="javadoc">
+    <delete  dir="${javadoc.dest.dir}"/>
+    <mkdir   dir="${javadoc.dest.dir}"/>
+    <javadoc packagenames="${pkgnames}"
+             sourcepath="${java.src.dir}"
+             destdir="${javadoc.dest.dir}"
+             maxmemory="64M"
+             author="false"
+             version="false"
+             use="true"
+             windowtitle="${ant.project.name} API"
+             bottom="${copyright}"
+    >
+      <classpath refid="project.class.path" />
+    </javadoc>
+  </target>
+
+   <!-- ==================== Setting JUnit ==================== -->   
+   <target name="JUNIT">
+        <available property="junit.present" classname="junit.framework.TestCase" />
+   </target>   
+   
+   <!-- ================== UnitTest on the new jar file ==================== -->
+   <target name="runtests" if="junit.present" depends="JUNIT">
+        <java fork="yes" classname="junit.textui.TestRunner" 
+            taskname="junit" failonerror="true">
+            <!--<arg value="-Dorg.xml.sax.driver=com.ibm.xml.parser.SAXDriver"/>-->
+            <arg value="UnitTest"/>
+            <classpath>
+                <pathelement location="${javasrcdir}" />
+                <pathelement path="" />
+                <pathelement path="${java.class.path}" />
+            </classpath>        
+        </java>
+   </target>
+
+  <target name="test">
+     <java classname="${junitrunclass}"
+           fork="yes"
+           maxmemory="64M"
+           dir="${basedir}"
+     >
+     <arg line="-noloading ${testclass}" />
+     <jvmarg value="-Xmx64M" />
+     <jvmarg value="-Djava.compiler=NONE" />
+       <classpath refid="project.class.path" />
+     </java>
+  </target>
+
+</project>

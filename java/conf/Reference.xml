@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Reference">
+	<select id="getAllStates" resultClass="com.ebiz.data.State">
+		SELECT 	code, 
+			name, 
+			country, 
+			tax_rate as taxRate
+		FROM 	State 
+		ORDER BY name
+	</select>
+	
+	<select id="getAllStatesByCountry" parameterClass="String" resultClass="com.ebiz.data.State">
+		SELECT 	code, 
+			name, 
+			country, 
+			tax_rate
+		FROM 	State 
+		WHERE 	country = #id#
+		ORDER BY name
+	</select>
+
+	<select id="getStatus" resultClass="com.ebiz.data.Status">
+		SELECT 	code, 
+			description, 
+			ordering 
+		FROM 	Status 
+		ORDER BY ordering
+	</select>
+
+</sqlMap>

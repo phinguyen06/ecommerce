@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="helloBean" class="test.spring.HelloBean">
+		<property name="helloService"> 
+			<ref bean="helloService" />
+		</property>
+		<property name="byeService">
+			<ref bean="byeService" />     
+		</property>  
+  </bean>
+  <bean id="helloService"
+	class="test.spring.HelloServiceImpl" />
+  <bean id="byeService"
+	class="test.spring.ByeServiceImpl" />
+</beans>

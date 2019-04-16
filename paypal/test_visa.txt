@@ -1,0 +1,42 @@
+brandon11151@yahoo.com/bellevue
+
+BUYER:
+
+firstname: Test
+LastName: User
+CardType: Visa
+CardNumber: 4947314020133818
+expDate: 01/2011
+cvv: 555
+123 main st bellevue 98005
+phone: 206 226-0043
+
+Country:   United States  
+Business Name:   None  
+Credit Card:   Visa   4357065968665137 
+Exp Date:  3/2019 
+ 
+Bank Account:   Checking (Confirmed) 
+Routing Number: 325272034 
+Bank Account Number: 765423441594335  
+Balance:   0.00 USD 
+Email:   Confirmed 
+Notes:    
+Date Created:    Mar. 12, 2009 17:24:38 PDT  
+
+
+
+SELLER:
+
+Country:   United States  
+Business Name:   BRANDON NGUYEN's Test Store  
+Credit Card:   Visa   4652137160583194 
+Exp Date:  3/2019 
+ 
+Bank Account:   Checking (Confirmed) 
+Routing Number: 325272047 
+Bank Account Number: 217008546016422  
+Balance:   0.00 USD 
+Email:   Confirmed 
+Notes:    
+Date Created:    Mar. 12, 2009 17:29:15 PDT  

@@ -1,0 +1,85 @@
+ebiz IDEAL GIFTS
+
+ebiz IDEAL SCALFS
+
+ebiz IDEAL ELECTRONICS
+
+ADD CHARACTER LIMIT TO ALL PAGES TO MATCH WITH DB TABLES
+
+
+Administration screens - view/update products, view order
+	Update wood_products - each product to update description and pricing (pricing is from script is better)
+	View category
+	Update category
+	Update order (when shipping happen, email notification about product shipment)
+	Reprocess order (payment, email, shipping)
+	
+
+
+
+
+******** NEED TO COMMENT OUT TEST CODE IN WoodServlet.  PAYMENT IS ALWAYS $0.01 to paypal
+
+
+
+HTTPS - Request for certificate and https after CartSummary.jsp
+
+
+ISSUE ON CREATE FOREIGN KEYS - http://dev.mysql.com/doc/refman/5.0/en/innodb-foreign-key-constraints.html
+
+
+DONE - Cancel order needs to clean up all sessions
+
+DONE - remove needs to remove an item from the cart
+
+DONE - Email confirmation page to customer by using gmail
+
+DONE - Don't allow checkout unless there is item in the cart
+
+DONE - Billing Address & Shipping address allow to be the same.  Prepopulated
+
+DONE - paypal confirmation number needs to update payment table.  That will determine if order is finally completed.
+
+DONE - all pages input validation to make sure require fields are entered
+	confirm password and password needs to match
+
+DONE - visa and master card number validation...
+
+DONE - Administration screens - view/update products, view order
+	Password validation
+	View wood_products
+	View orders for the day
+	View failed orders
+
+DONE - Encrypt/decrypt PAYPAL credential before and after use to prevent decompiling of java code	
+
+DONE - Add log4j
+
+DONE - Move all javascript into js file
+
+DONE - page counter
+
+DONE - Customer support screen
+	Password validation
+	Tracking order by order Id
+
+DONE - Add static html to bottom links
+
+DONE - Add Shipping cost to total cost before display on cartSummary.jsp
+
+DONE - CreateAccount - Check EMAIL already existed.  Resend password to customer
+
+NO FIX - Fix Comments.  Why it show up on Payment page while comment is part of Order attribute
+
+DONE - Transaction doesn't work still.  Couple inserts succeeded, one insert fails, it doesn't rollback the whole transaction
+
+DONE - Wait page while order is processing
+
+NO FIX - Integrate with paypal
+	If paypal fail, process order offline & notify customer about offline processing
+
+DONE - payment page - do some validation on radio button for visa vs paypal card
+
+DONE - SAVE order confirmation number (from site) to DB for references only - if later on need to send email....
+
+DONE - Fix all button - menu button, ebiz logo, continue button to bold them and surround color

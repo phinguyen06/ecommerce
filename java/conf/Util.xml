@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Util">
+
+	<resultMap id="configMap" class="com.ebiz.data.Config">
+		<result property="key" column="cKey"/>
+		<result property="value" column="cValue"/>
+	</resultMap>
+
+
+	<insert id="insertTracker" parameterClass="com.ebiz.data.Tracker">
+		INSERT INTO Tracker 
+		( 
+			category_id, 
+			product_id,
+			product_type, 
+			client_id, 
+			page, 
+			create_date
+		)
+		VALUES (#categoryId#,#productId#,#productType#,#clientId#,#page#,sysdate())
+		
+		<selectKey keyProperty="id" resultClass="int">
+			SELECT LAST_INSERT_ID() AS Id
+		</selectKey>	
+
+	</insert>
+	
+	<select id="getConfig" resultClass="com.ebiz.data.Config" resultMap="configMap">
+		SELECT 	cKey, 
+			cValue 
+		FROM 	Config 
+		ORDER BY cKey
+	</select>
+
+</sqlMap>

@@ -1,0 +1,22 @@
+10 -> 170,000
+7.65 -> 130,000
+
+shipping_cost = 4.85
+
+7.67 + 4.85 = 12.52
+
+product_margin
+
+
+
+currency
+
+Type	US	Other
+VN	1	17000
+EU	1	
+
+
+
+1.Ma CODE X .-TIGER Helicopter 56x25x19 = 80 cai / 1m3
+2 .Ma CODE X 32 BOEING 747 50x45x18  = 80 cai/ 1m3
+3. Ma CODE No 11 -MGB - MKI  37x14x12 = 96 Cai / 1m3
