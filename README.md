@@ -1,7 +1,7 @@
-# ExamHub
+# eCommerce
 
 
-ExamHub is plain old java project to create a question and answer application.  Similar to any survey application out there.  You can setup any number of questions with multiple choice answer.  It's a working appliczation that can be replicated with small chances.  You can standup a new q/a application up quickly.
+eCommerce is plain old java project with jsp pages to create a shopping cart application with payment processing through paypal api.  Application can run on any database and jdbc drive.  What bundled in the application is scripts and drive to run mysql.  It's a working appliczation that can be replicated with small chances.  You can standup a new application up quickly.
 
 
 # Setup
