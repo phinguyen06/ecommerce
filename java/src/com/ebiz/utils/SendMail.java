@@ -31,10 +31,6 @@ public class SendMail {
 	private String[] fileName = null;
 	private Session session = null;
 
-	// private String server = "gmail-smtp.l.google.com";
-
-	// private final String SMTP_AUTH_USER = "phi2006@gmail.com";
-	// private final String SMTP_AUTH_PWD = "saigon";
 
 	/**
 	 * 
@@ -398,7 +394,7 @@ public class SendMail {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SendMail mail = new SendMail("phi2006@gmail.com", "phi2006@gmail.com",
+		SendMail mail = new SendMail("xxx@gmail.com", "xxx@gmail.com",
 				"test subject", "test message");
 		mail.send();
 		System.out.println("successfully sent");

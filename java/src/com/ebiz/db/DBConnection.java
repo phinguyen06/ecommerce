@@ -36,8 +36,8 @@ public class DBConnection {
 	
 	
 	final String jdbcUrl = "jdbc:mysql://localhost:3306/ebizdeal?autoReconnect=true";
-	final String dbUser = "phin";
-	final String dbPassword = "phin";
+	final String dbUser = "xxx";
+	final String dbPassword = "xxx";
 
 	final String dataSourceContext = "java:/comp/env/jdbc/ebizdeal_ebizdeal";
 

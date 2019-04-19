@@ -13,18 +13,18 @@ try{
 System.setProperty("https.proxySet","false");
 Customer customer = new Customer();
 
-customer.setFirstName("PHI");
-customer.setLastName("NGUYEN");
-customer.setEmail("phi@gmail.com");
-customer.setContactPhone("2062260043");
-customer.setContactFax("2062260043");
+customer.setFirstName("xxx");
+customer.setLastName("xxx");
+customer.setEmail("xxx@gmail.com");
+customer.setContactPhone("xxx");
+customer.setContactFax("xxx");
 customer.setPassword("passwd");
-customer.setAddress1("5421 33RD CT SE");
+customer.setAddress1("xxx");
 customer.setAddress2(" line 2");
-customer.setCity("LACEY");
+customer.setCity("xxx");
 customer.setState("WA");
-customer.setZip("98503");
-customer.setZip4("4445");
+customer.setZip("xxx");
+customer.setZip4("xxx");
 customer.setCountry("US");
 customer.setShipAddress1("124 main st");
 customer.setShipAddress2(" line 2");
@@ -37,11 +37,11 @@ customer.setShipCountry("US");
 java.text.SimpleDateFormat fm = new java.text.SimpleDateFormat("MMyyyy");
 
 Payment payment = new Payment();
-payment.setCardHolderName("PHI NGUYEN");
+payment.setCardHolderName("xxx");
 payment.setCardType("Visa");
-payment.setCardNumber("4652137160583194");
-payment.setCardCVV("000");
-payment.setCardExpDate(fm.parse("032019"));
+payment.setCardNumber("xxx");
+payment.setCardCVV("xxx");
+payment.setCardExpDate(fm.parse("xxx"));
 payment.setAmount(0.1);
  		 
 Order order = new Order();

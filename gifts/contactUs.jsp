@@ -24,7 +24,7 @@ try
 		String question = request.getParameter("taQuestion");
 		validate( name, email, question );
 		
-		SendMail mail = new SendMail("phi2006@gmail.com", "Wood Product Question from " + name, " email: " + email, question);
+		SendMail mail = new SendMail("xxx@gmail.com", "Wood Product Question from " + name, " email: " + email, question);
 		mail.send();
 		respMessage = "Your enquiry has been successfully sent to the Support personel.";
 	}

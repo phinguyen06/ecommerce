@@ -524,40 +524,11 @@ public class UserDB {
 
 	public static void main(String[] args) throws Exception
 	{
-		/*
-		logger.debug("-------validate user--------------");
-		System.out.println("-------validate user--------------");
-		EcryptoDataProvider.init("ZUJpeiBpcyBhIGdsb2JhbCB0cmFkaW5nIGNvbXBhbnkgZm9yIGJvdGggaW1wb3J0IGFuZCBleHBvcnQ=", "REVT");
-		User u = UserDB.validateUser("brandon11151@yahoo.com", "test", true);
-		logger.debug(u.toString());
-		//System.out.println("password:"+u.getPassword()+ " perm:"+u.getPermission().getDescription()+ " cus:"+u.getCustomer().getFirstName());
-		System.out.println("password:"+u.getPassword()+ " cus:"+u.getCustomer().getFirstName());
-		*/
-
-		/*
-		logger.debug("-------validate admin user--------------");
-		System.out.println("-------validate admin user--------------");
-		EcryptoDataProvider.init("ZUJpeiBpcyBhIGdsb2JhbCB0cmFkaW5nIGNvbXBhbnkgZm9yIGJvdGggaW1wb3J0IGFuZCBleHBvcnQ=", "REVT");
-		User u = UserDB.validateAdminUser("phi2006@gmail.com", "test");
-		logger.debug(u.toString());
-		//System.out.println("password:"+u.getPassword()+ " perm:"+u.getPermission().getDescription()+ " cus:"+u.getCustomer().getFirstName());
-		System.out.println("password:"+u.getPassword()+ " perm:"+u.getPermission().getDescription());
-		*/
-		
-		/*
-		logger.debug("-------insert user--------------");
-		EcryptoDataProvider.init("ZUJpeiBpcyBhIGdsb2JhbCB0cmFkaW5nIGNvbXBhbnkgZm9yIGJvdGggaW1wb3J0IGFuZCBleHBvcnQ=", "REVT");
-		Permission perm = new Permission("User","Web User");
-		User user = new User("brandon11155@yahoo.com","test");
-		user.setPermission(perm);
-		UserDB db = new UserDB();
-		db.insertUser(user);
-		*/
 
 		logger.debug("-------update user--------------");
 		EcryptoDataProvider.init("ZUJpeiBpcyBhIGdsb2JhbCB0cmFkaW5nIGNvbXBhbnkgZm9yIGJvdGggaW1wb3J0IGFuZCBleHBvcnQ=", "REVT");
 		Permission perm = new Permission("User","Web User");
-		User user = new User("brandon11154@yahoo.com","test");
+		User user = new User("xxxx@yahoo.com","test");
 		user.setPermission(perm);
 		UserDB db = new UserDB();
 		db.updateUser(user);

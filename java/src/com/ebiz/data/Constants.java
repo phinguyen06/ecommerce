@@ -56,14 +56,14 @@ public class Constants {
 	public final static String s_FORGOT_EMAIL_SUBJECT = "eBiz Password Resend"; 
 
 	//EMAIL Configuration
-	public final static String s_EMAIL_FROM = "global_ebiz@gmail.com";
-	public final static String s_EMAIL_SMTP_AUTH_USER = "phi2006@gmail.com";
-	public final static String s_EMAIL_SMTP_AUTH_PWD = "bellevue";
+	public final static String s_EMAIL_FROM = "xxx@gmail.com";
+	public final static String s_EMAIL_SMTP_AUTH_USER = "xxx@gmail.com";
+	public final static String s_EMAIL_SMTP_AUTH_PWD = "xxx";
 	public final static String s_EMAIL_SERVER = "gmail-smtp.l.google.com";
 	public final static String s_EMAIL_HOST = "mail.smtp.host";
 	
 	//Use this email to test on prod
-	public final static String s_TEST_CUSTOMER = "brandon11151@yahoo.com";
+	public final static String s_TEST_CUSTOMER = "xxx@yahoo.com";
 
 	//ERROR related
 	public final static String s_ERROR_MSG_ORDER_PROBLEM = "Sorry for the Inconvenience.  We are unable to process order.  Please contact our customer service for help.";
