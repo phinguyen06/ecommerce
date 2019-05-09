@@ -1,7 +1,7 @@
 # eCommerce
 
 
-eCommerce is plain old java project with jsp pages to create a shopping cart application with payment processing through paypal api.  Application can run on any database and jdbc drive.  What bundled in the application is scripts and drive to run mysql.  It's a working application that can be replicated with small chances.  You can standup a new application up quickly.
+eCommerce is plain old java project with jsp pages to create a shopping cart application with payment processing through paypal api.  Application can run on any database and jdbc driver.  What bundled in the application is scripts and driver to run mysql.  It's a working application that can be replicated with small chances.  You can standup a new application up quickly.
 
 
 # Setup
